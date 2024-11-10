@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Shop - BananaClicker</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        text-align: center;
+        background-color: #f0f4c3; /* Light background */
+        color: #212121; /* Dark text color for readability */
+        line-height: 1.6;
+      }
+
+      h1 {
+        font-size: 2em; /* Smaller heading size */
+        color: #f57c00; /* Bright orange for headings */
+        margin-bottom: 20px;
+      }
+
+      .banana {
+        font-size: 5em; /* Smaller banana size */
+        cursor: pointer;
+      }
+
+      #score {
+        font-size: 1.8em; /* Smaller score text size */
+        margin-top: 20px;
+        font-weight: bold;
+        color: #212121; /* Darker color for score */
+      }
+
+      #shop-btn {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 12px 24px;
+        font-size: 1.3em; /* Smaller button text size */
+        color: #fff; /* White text on buttons */
+        background-color: #8d6e63; /* Subtle brown for the button */
+        border: none;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+      }
+
+      #shop-btn:hover {
+        background-color: #6d4c41; /* Darken the button on hover */
+      }
+
+      #shop-btn:focus {
+        outline: none;
+      }
+
+      #score-display {
+        font-size: 1.8em; /* Smaller score display size */
+        margin: 25px 0;
+        color: #212121; /* Dark score text color */
+      }
+
+      #upgrade-cost {
+        font-size: 1.6em; /* Smaller upgrade cost text size */
+        margin-top: 15px;
+        font-weight: bold;
+        color: #f57c00; /* Bright orange for upgrade cost */
+      }
+
+      .shop-item {
+        font-size: 1.6em; /* Smaller item text size */
+        margin: 25px;
+        color: #212121; /* Dark color for item text */
+      }
+
+      .shop-item button {
+        padding: 12px 24px;
+        font-size: 1.3em; /* Smaller button text size */
+        color: white;
+        background-color: #8d6e63; /* Light brown button */
+        border: none;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+      }
+
+      .shop-item button:hover {
+        background-color: #6d4c41; /* Darker brown on hover */
+      }
+
+      #back-btn {
+        padding: 12px 24px;
+        font-size: 1.3em; /* Smaller back button text size */
+        color: white;
+        background-color: #f57c00; /* Orange for back button */
+        border: none;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-top: 30px;
+        transition: background-color 0.3s ease;
+      }
+
+      #back-btn:hover {
+        background-color: #e65100; /* Darker orange on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to The Shop!</h1>
+    <div id="score-display">🍌: 0</div>
+    <!-- Score display -->
+
+    <div id="shop-items">
+      <div class="shop-item">
+        <p>Upgrade Click Power</p>
+        <div id="upgrade-cost">Cost: 50</div>
+        <!-- Display upgrade cost -->
+        <button onclick="buyClickPowerUpgrade()">Buy Upgrade</button>
+      </div>
+      <div class="shop-item">
+        <p>More upgrades coming soon!</p>
+      </div>
+    </div>
+
+    <button id="back-btn" onclick="goBack()">Back to BananaClicker</button>
+
+    <script>
+      // Load saved score and upgrade data from localStorage
+      let score = parseInt(localStorage.getItem("score")) || 0;
+      let clickPower = parseInt(localStorage.getItem("clickPower")) || 1;
+      let upgradeCost = parseInt(localStorage.getItem("upgradeCost")) || 50;
+
+      // Display current score on the Shop page
+      document.getElementById("score-display").innerText = "🍌: " + score;
+      // Display the current upgrade cost
+      document.getElementById("upgrade-cost").innerText =
+        "Cost: " + upgradeCost;
+
+      function buyClickPowerUpgrade() {
+        if (score >= upgradeCost) {
+          // Deduct score and upgrade click power
+          score -= upgradeCost;
+          clickPower += 1;
+          upgradeCost *= 2; // Double the upgrade cost
+
+          // Save updated values to localStorage
+          localStorage.setItem("score", score);
+          localStorage.setItem("clickPower", clickPower);
+          localStorage.setItem("upgradeCost", upgradeCost);
+
+          // Update score display
+          document.getElementById("score-display").innerText = "🍌: " + score;
+          // Update the upgrade cost display
+          document.getElementById("upgrade-cost").innerText =
+            "Cost: " + upgradeCost;
+
+          alert("Upgrade successful! New score: " + score);
+          window.location.reload(); // Refresh page to update score
+        } else {
+          alert("You don't have enough points!");
+        }
+      }
+
+      function goBack() {
+        window.location.href = "index.html"; // Go back to the main page
+      }
+    </script>
+  </body>
+</html>

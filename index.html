@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BananaClicker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f4c3;
+            color: #3e2723;
+        }
+        h1 {
+            font-size: 2em;
+            color: #ffeb3b;
+        }
+        .banana {
+            font-size: 5em;
+            cursor: pointer;
+        }
+        #score {
+            font-size: 2em;
+            margin-top: 20px;
+        }
+        #shop-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: white;
+            background-color: #f57c00;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🍌 BananaClicker 🍌</h1>
+    <p id="score">Score: 0</p>
+    <div class="banana" onclick="clickBanana()">🍌</div>
+    <br>
+    <button id="shop-btn" onclick="goToShop()">Go to The Shop</button>
+
+    <script>
+        // Load saved score and upgrade data from localStorage
+        let score = parseInt(localStorage.getItem("score")) || 0;
+        let clickPower = parseInt(localStorage.getItem("clickPower")) || 1;
+        let upgradeCost = parseInt(localStorage.getItem("upgradeCost")) || 50;
+
+        // Display the saved score
+        document.getElementById("score").innerText = "Score: " + score;
+
+        function clickBanana() {
+            // Increase score by clickPower
+            score += clickPower;
+            // Save the new score to localStorage
+            localStorage.setItem("score", score);
+            document.getElementById("score").innerText = "Score: " + score;
+        }
+
+        function goToShop() {
+            window.location.href = "shop.html"; // Redirect to shop page
+        }
+
+        // Initial check to enable/disable the upgrade button
+    </script>
+
+</body>
+</html>
