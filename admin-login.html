@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f0f4c3;
+        color: #212121;
+        margin-top: 100px;
+      }
+      input[type="password"] {
+        padding: 10px;
+        font-size: 1.2em;
+        width: 250px;
+        margin-bottom: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 1.2em;
+        background-color: #8d6e63;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #6d4c41;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Admin Login</h1>
+    <input type="password" id="password" placeholder="Enter Admin Password" />
+    <button onclick="verifyPassword()">Login</button>
+
+    <script>
+      function verifyPassword() {
+        const password = document.getElementById("password").value;
+        if (password === "divisionOne!") {
+          window.location.href = "admin-panel.html"; // Redirect to admin panel
+        } else {
+          alert("Incorrect password!");
+        }
+      }
+    </script>
+  </body>
+</html>

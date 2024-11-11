@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f4c3;
+            color: #212121;
+            margin-top: 100px;
+        }
+        input[type="number"] {
+            padding: 10px;
+            font-size: 1.2em;
+            width: 100px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #8d6e63;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #6d4c41;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <p>Set Banana Score</p>
+    <input type="number" id="bananaScore" placeholder="Enter new score">
+    <button onclick="setBananaScore()">Update Score</button>
+
+    <script>
+        function setBananaScore() {
+            const newScore = parseInt(document.getElementById('bananaScore').value);
+            if (!isNaN(newScore)) {
+                localStorage.setItem("score", newScore);
+                alert(`Banana score set to ${newScore}`);
+            } else {
+                alert("Please enter a valid number.");
+            }
+        }
+    </script>
+</body>
+</html>
