@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Shop - BananaClicker</title>
     <style>
-      /* Styles remain unchanged */
       body {
         font-family: "Arial", sans-serif;
         text-align: center;
@@ -95,7 +94,7 @@
   <body>
     <h1>Welcome to The Shop!</h1>
     <div id="score-display">🍌: 0</div>
-    <!-- Score display -->
+    <!--score displayer-->
 
     <div id="shop-items">
       <div class="shop-item">
@@ -117,7 +116,7 @@
       let clickPower = parseInt(localStorage.getItem("clickPower")) || 1;
       let upgradeCost = parseInt(localStorage.getItem("upgradeCost")) || 50;
 
-      // Display current score on the Shop page
+      // display current score on the shop page
       document.getElementById("score-display").innerText = "🍌: " + score;
       // Display the current upgrade cost
       document.getElementById("upgrade-cost").innerText =
@@ -125,31 +124,31 @@
 
       function buyClickPowerUpgrade() {
         if (score >= upgradeCost) {
-          // Deduct score and upgrade click power
+          // deduct score and upgrade click power
           score -= upgradeCost;
           clickPower += 1;
-          upgradeCost *= 2; // Double the upgrade cost
+          upgradeCost *= 2; // double the upgrade cost
 
-          // Save updated values to localStorage
+          // save updated values to localStorage
           localStorage.setItem("score", score);
           localStorage.setItem("clickPower", clickPower);
           localStorage.setItem("upgradeCost", upgradeCost);
 
-          // Update score display
+          // update score display
           document.getElementById("score-display").innerText = "🍌: " + score;
-          // Update the upgrade cost display
+          // update the upgrade cost display
           document.getElementById("upgrade-cost").innerText =
             "Cost: " + upgradeCost;
 
           alert("Upgrade successful! New score: " + score);
-          window.location.reload(); // Refresh page to update score
+          window.location.reload(); // refresh page to update score
         } else {
           alert("You don't have enough points!");
         }
       }
 
       function goBack() {
-        window.location.href = "index.html"; // Go back to the main page
+        window.location.href = "index.html"; // go back to the main page
       }
 
       // Admin login detection
