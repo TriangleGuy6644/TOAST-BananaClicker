@@ -5,98 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Shop - BananaClicker</title>
     <style>
+      /* Styles remain unchanged */
       body {
         font-family: "Arial", sans-serif;
         text-align: center;
-        background-color: #f0f4c3; /* Light background */
-        color: #212121; /* Dark text color for readability */
+        background-color: #f0f4c3;
+        color: #212121;
         line-height: 1.6;
       }
-
       h1 {
-        font-size: 2em; /* Smaller heading size */
-        color: #f57c00; /* Bright orange for headings */
+        font-size: 2em;
+        color: #f57c00;
         margin-bottom: 20px;
       }
-
       .banana {
-        font-size: 5em; /* Smaller banana size */
+        font-size: 5em;
         cursor: pointer;
       }
-
       #score {
-        font-size: 1.8em; /* Smaller score text size */
+        font-size: 1.8em;
         margin-top: 20px;
         font-weight: bold;
-        color: #212121; /* Darker color for score */
+        color: #212121;
       }
-
       #shop-btn {
         display: inline-block;
         margin-top: 30px;
         padding: 12px 24px;
-        font-size: 1.3em; /* Smaller button text size */
-        color: #fff; /* White text on buttons */
-        background-color: #8d6e63; /* Subtle brown for the button */
+        font-size: 1.3em;
+        color: #fff;
+        background-color: #8d6e63;
         border: none;
         cursor: pointer;
         border-radius: 8px;
         transition: background-color 0.3s ease;
       }
-
       #shop-btn:hover {
-        background-color: #6d4c41; /* Darken the button on hover */
+        background-color: #6d4c41;
       }
-
+      #shop-btn:focus {
+        outline: none;
+      }
       #score-display {
-        font-size: 1.8em; /* Smaller score display size */
+        font-size: 1.8em;
         margin: 25px 0;
-        color: #212121; /* Dark score text color */
+        color: #212121;
       }
-
       #upgrade-cost {
-        font-size: 1.6em; /* Smaller upgrade cost text size */
+        font-size: 1.6em;
         margin-top: 15px;
         font-weight: bold;
-        color: #f57c00; /* Bright orange for upgrade cost */
+        color: #f57c00;
       }
-
       .shop-item {
-        font-size: 1.6em; /* Smaller item text size */
+        font-size: 1.6em;
         margin: 25px;
-        color: #212121; /* Dark color for item text */
+        color: #212121;
       }
-
       .shop-item button {
         padding: 12px 24px;
-        font-size: 1.3em; /* Smaller button text size */
+        font-size: 1.3em;
         color: white;
-        background-color: #8d6e63; /* Light brown button */
+        background-color: #8d6e63;
         border: none;
         cursor: pointer;
         border-radius: 8px;
         margin-top: 10px;
         transition: background-color 0.3s ease;
       }
-
       .shop-item button:hover {
-        background-color: #6d4c41; /* Darker brown on hover */
+        background-color: #6d4c41;
       }
-
       #back-btn {
         padding: 12px 24px;
-        font-size: 1.3em; /* Smaller back button text size */
+        font-size: 1.3em;
         color: white;
-        background-color: #f57c00; /* Orange for back button */
+        background-color: #f57c00;
         border: none;
         cursor: pointer;
         border-radius: 8px;
         margin-top: 30px;
         transition: background-color 0.3s ease;
       }
-
       #back-btn:hover {
-        background-color: #e65100; /* Darker orange on hover */
+        background-color: #e65100;
       }
     </style>
   </head>
@@ -112,13 +104,6 @@
         <!-- Display upgrade cost -->
         <button onclick="buyClickPowerUpgrade()">Buy Upgrade</button>
       </div>
-
-      <div class="shop-item">
-        <p>Buy Monkey Helpers</p>
-        <div id="monkey-upgrade-cost">Cost: 100</div>
-        <button onclick="buyMonkeyHelper()">Buy Monkey Helper</button>
-      </div>
-
       <div class="shop-item">
         <p>More upgrades coming soon!</p>
       </div>
@@ -131,20 +116,12 @@
       let score = parseInt(localStorage.getItem("score")) || 0;
       let clickPower = parseInt(localStorage.getItem("clickPower")) || 1;
       let upgradeCost = parseInt(localStorage.getItem("upgradeCost")) || 50;
-      let monkeyHelpers = parseInt(localStorage.getItem("monkeyHelpers")) || 0;
-      let monkeyUpgradeCost =
-        parseInt(localStorage.getItem("monkeyUpgradeCost")) || 100;
 
       // Display current score on the Shop page
       document.getElementById("score-display").innerText = "🍌: " + score;
-
-      // Display the current upgrade cost for click power
+      // Display the current upgrade cost
       document.getElementById("upgrade-cost").innerText =
         "Cost: " + upgradeCost;
-
-      // Display the current upgrade cost for monkey helpers
-      document.getElementById("monkey-upgrade-cost").innerText =
-        "Cost: " + monkeyUpgradeCost;
 
       function buyClickPowerUpgrade() {
         if (score >= upgradeCost) {
@@ -160,6 +137,7 @@
 
           // Update score display
           document.getElementById("score-display").innerText = "🍌: " + score;
+          // Update the upgrade cost display
           document.getElementById("upgrade-cost").innerText =
             "Cost: " + upgradeCost;
 
@@ -170,33 +148,21 @@
         }
       }
 
-      function buyMonkeyHelper() {
-        if (score >= monkeyUpgradeCost) {
-          // Deduct score and buy a monkey helper
-          score -= monkeyUpgradeCost;
-          monkeyHelpers += 1;
-          monkeyUpgradeCost *= 2; // Double the cost for the next monkey helper
-
-          // Save updated values to localStorage
-          localStorage.setItem("score", score);
-          localStorage.setItem("monkeyHelpers", monkeyHelpers);
-          localStorage.setItem("monkeyUpgradeCost", monkeyUpgradeCost);
-
-          // Update score display
-          document.getElementById("score-display").innerText = "🍌: " + score;
-          document.getElementById("monkey-upgrade-cost").innerText =
-            "Cost: " + monkeyUpgradeCost;
-
-          alert("Monkey helper bought! Total helpers: " + monkeyHelpers);
-          window.location.reload(); // Refresh page to update score
-        } else {
-          alert("You don't have enough points!");
-        }
-      }
-
       function goBack() {
         window.location.href = "index.html"; // Go back to the main page
       }
+
+      // Admin login detection
+      let adminCode = "";
+      document.addEventListener("keyup", (event) => {
+        adminCode += event.key.toUpperCase();
+        if (adminCode.includes("ADMIN")) {
+          window.location.href = "admin-login.html"; // Redirect to the admin login page
+        }
+        if (adminCode.length > 5) {
+          adminCode = adminCode.slice(-5); // Keep only the last 5 characters
+        }
+      });
     </script>
   </body>
 </html>
