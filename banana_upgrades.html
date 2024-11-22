@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Banana Upgrades - BananaClicker</title>
+    <style>
+      /* Styles remain unchanged from previous pages */
+      body {
+        font-family: "Arial", sans-serif;
+        text-align: center;
+        background-color: #f0f4c3;
+        color: #212121;
+        line-height: 1.6;
+      }
+      h1 {
+        font-size: 2em;
+        color: #f57c00;
+        margin-bottom: 20px;
+      }
+      #score-display {
+        font-size: 1.8em;
+        margin: 25px 0;
+        color: #212121;
+      }
+      #back-btn {
+        padding: 12px 24px;
+        font-size: 1.3em;
+        color: white;
+        background-color: #f57c00;
+        border: none;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-top: 30px;
+        transition: background-color 0.3s ease;
+      }
+      #back-btn:hover {
+        background-color: #e65100;
+      }
+      .shop-item {
+        font-size: 1.6em;
+        margin: 25px;
+        color: #212121;
+      }
+      .shop-item button {
+        padding: 12px 24px;
+        font-size: 1.3em;
+        color: white;
+        background-color: #8d6e63;
+        border: none;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+      }
+      .shop-item button:hover {
+        background-color: #6d4c41;
+      }
+      #apple-btn {
+        padding: 12px 24px;
+        font-size: 1.3em;
+        color: white;
+        background-color: #8d6e63;
+        border: none;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-top: 30px;
+        transition: background-color 0.3s ease;
+      }
+      #apple-btn:hover {
+        background-color: #6d4c41;
+      }
+      #apple-btn:focus {
+        outline: none;
+      }
+
+      #apple-btn img {
+        width: 30px;
+        vertical-align: middle;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Banana Upgrades</h1>
+    <div id="score-display">🍌: 0</div>
+    <!-- Display current score -->
+
+    <div class="shop-item">
+      <p>Apple Upgrade</p>
+      <div id="apple-cost">Cost: 100 🍌</div>
+      <!-- Display the price of the apple upgrade -->
+      <button id="apple-btn" onclick="buyAppleUpgrade()">
+        <img src="images/banana.png" alt="Banana" /> Apple Upgrade
+      </button>
+    </div>
+
+    <button id="back-btn" onclick="goBack()">Back to Shop</button>
+
+    <script>
+      // Load saved score and upgrade data from localStorage
+      let score = parseInt(localStorage.getItem("score")) || 0;
+      let appleCost = 100; // Apple upgrade cost
+      let applePurchased = localStorage.getItem("applePurchased") === "true"; // Check if upgrade is purchased
+
+      // Display current score on the page
+      document.getElementById("score-display").innerText = "🍌: " + score;
+
+      // Disable the Apple Upgrade button if already purchased
+      if (applePurchased) {
+        document.getElementById("apple-btn").disabled = true;
+        document.getElementById("apple-btn").innerText =
+          "Apple Upgrade Purchased";
+      }
+
+      function buyAppleUpgrade() {
+        if (score >= appleCost) {
+          // Deduct score and change the banana image to apple
+          score -= appleCost;
+          localStorage.setItem("score", score); // Save updated score
+
+          // Update the image source on the main page (index.html)
+          localStorage.setItem("images/banana.png", "images/apple.png");
+
+          // Mark the upgrade as purchased
+          localStorage.setItem("applePurchased", "true");
+
+          // Update the score display
+          document.getElementById("score-display").innerText = "🍌: " + score;
+
+          // Disable the button and change its text
+          document.getElementById("apple-btn").disabled = true;
+          document.getElementById("apple-btn").innerText =
+            "Apple Upgrade Purchased";
+
+          alert("Apple upgrade purchased! Your new score is: " + score);
+        } else {
+          alert("You don't have enough 🍌 to buy the Apple Upgrade!");
+        }
+      }
+
+      function goBack() {
+        window.location.href = "shop.html"; // Go back to the shop page
+      }
+    </script>
+  </body>
+</html>
