@@ -157,11 +157,11 @@
         if (score >= upgradeCost) {
           // Deduct score and upgrade click power
           score -= upgradeCost;
-          clickPower += 1;
+          clickPower *= 2;
 
           // Prevent upgrade cost from becoming too high
-          if (upgradeCost * 2 <= 1000) {
-            upgradeCost *= 2; // Double the upgrade cost
+          if (upgradeCost * 2 <= 10000000000) {
+            upgradeCost *= 3; // Triple the upgrade cost
           } else {
             upgradeCost = 1000; // Cap at 1000 if it gets too high
           }
@@ -198,6 +198,15 @@
         adminCode += event.key.toUpperCase();
         if (adminCode.includes("ADMIN")) {
           window.location.href = "admin-login.html"; // Redirect to the admin login page
+        }
+        if (adminCode.includes("RESET")) {
+          const confirmation = confirm("Are you sure you want to reset all your data?");
+          if (confirmation) {
+            // Reset localStorage and reload the page
+            localStorage.clear();
+            alert("All data has been reset.");
+            window.location.reload(); // Reload the page to reflect changes
+          }
         }
         if (adminCode.length > 5) {
           adminCode = adminCode.slice(-5); // Keep only the last 5 characters
