@@ -34,6 +34,18 @@
         cursor: pointer;
         border-radius: 5px;
       }
+      /* Add styles for monkeys */
+      .monkey {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        background-image: url('images/monkey.png'); /* Add your monkey image path */
+        background-size: cover;
+        margin: 5px;
+      }
+      #monkey-container {
+        margin-top: 20px;
+      }
     </style>
   </head>
   <body>
@@ -49,11 +61,14 @@
     <br />
     <button id="shop-btn" onclick="goToShop()">Go to The Shop</button>
 
+    <div id="monkey-container"></div>
+    <!-- Container for displaying monkeys -->
+
     <script>
       // Load saved score and upgrade data from localStorage
       let score = parseInt(localStorage.getItem("score")) || 0;
       let clickPower = parseInt(localStorage.getItem("clickPower")) || 1;
-      let upgradeCost = parseInt(localStorage.getItem("upgradeCost")) || 50;
+      let monkeyCount = parseInt(localStorage.getItem("monkeyCount")) || 0;
 
       // Display the saved score
       document.getElementById("score").innerText = "Score: " + score;
@@ -70,7 +85,29 @@
         window.location.href = "shop.html"; // Redirect to shop page
       }
 
-      // Initial check to enable/disable the upgrade button
+      // Function to display monkeys
+      function displayMonkeys() {
+        const monkeyContainer = document.getElementById("monkey-container");
+        monkeyContainer.innerHTML = ""; // Clear existing monkeys
+        for (let i = 0; i < monkeyCount; i++) {
+          const monkeyDiv = document.createElement("div");
+          monkeyDiv.className = "monkey";
+          monkeyContainer.appendChild(monkeyDiv);
+        }
+      }
+
+      // Function to generate bananas over time
+      function generateBananas() {
+        setInterval(() => {
+          score += monkeyCount; // Generate bananas based on the number of monkeys
+          localStorage.setItem("score", score); // Update score in localStorage
+          document.getElementById("score").innerText = "Score: " + score; // Update score display
+        }, 1000); // Adjust the interval as needed (1000 ms = 1 second)
+      }
+
+      // Call the functions to display monkeys and start generating bananas
+      displayMonkeys();
+      generateBananas();
     </script>
   </body>
 </html>

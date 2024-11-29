@@ -130,6 +130,12 @@
         <button onclick="buyClickPowerUpgrade()">Buy Upgrade</button>
       </div>
       <div class="shop-item">
+        <p>Monkey Helper</p>
+        <div id="monkey-cost">Cost: 100</div>
+        <!-- Display monkey upgrade cost -->
+        <button onclick="buyMonkeyHelper()">Buy Monkey Helper</button>
+      </div>
+      <div class="shop-item">
         <p>More upgrades coming soon!</p>
       </div>
     </div>
@@ -147,11 +153,18 @@
       let clickPower = parseInt(localStorage.getItem("clickPower")) || 1;
       let upgradeCost = parseInt(localStorage.getItem("upgradeCost")) || 50;
 
+      // Load saved monkey data from localStorage
+      let monkeyCount = parseInt(localStorage.getItem("monkeyCount")) || 0;
+      let monkeyCost = parseInt(localStorage.getItem("monkeyCost")) || 100;
+
       // Display current score on the Shop page
       document.getElementById("score-display").innerText = "🍌: " + score;
       // Display the current upgrade cost
       document.getElementById("upgrade-cost").innerText =
         "Cost: " + upgradeCost;
+      // Display the current monkey cost
+      document.getElementById("monkey-cost").innerText =
+        "Cost: " + monkeyCost;
 
       function buyClickPowerUpgrade() {
         if (score >= upgradeCost) {
@@ -178,6 +191,32 @@
             "Cost: " + upgradeCost;
 
           alert("Upgrade successful! New score: " + score);
+        } else {
+          alert("You don't have enough points!");
+        }
+      }
+
+      function buyMonkeyHelper() {
+        if (score >= monkeyCost) {
+          // Deduct score and add a monkey
+          score -= monkeyCost;
+          monkeyCount += 1;
+
+          // Quadruple the monkey cost
+          monkeyCost *= 2.5;
+
+          // Save updated values to localStorage
+          localStorage.setItem("score", score);
+          localStorage.setItem("monkeyCount", monkeyCount);
+          localStorage.setItem("monkeyCost", monkeyCost);
+
+          // Update score display
+          document.getElementById("score-display").innerText = "🍌: " + score;
+          // Update the monkey cost display
+          document.getElementById("monkey-cost").innerText =
+            "Cost: " + monkeyCost;
+
+          alert("Monkey Helper purchased! Total monkeys: " + monkeyCount);
         } else {
           alert("You don't have enough points!");
         }
