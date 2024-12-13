@@ -202,8 +202,8 @@
           score -= monkeyCost;
           monkeyCount += 1;
 
-          // Quadruple the monkey cost
-          monkeyCost *= 2.5;
+          // Double.5s the monkey cost. (2.5x)
+          monkeyCost = Math.floor(monkeyCost * 2.5); // Use Math.floor to ensure no decimals
 
           // Save updated values to localStorage
           localStorage.setItem("score", score);
